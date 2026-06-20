@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>U.U.R. Webmaster Dashboard</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body class="admin-page">
+  <header class="admin-header">
+    <a class="brand" href="index.html">
+      <img src="assets/uur-flag.svg" alt="U.U.R. flag">
+      <div>
+        <span class="brand-kicker">Office of Public Information</span>
+        <strong>Directory Control</strong>
+      </div>
+    </a>
+    <div class="admin-header-actions">
+      <span id="adminClock">CST</span>
+      <a class="text-link" href="index.html">Public site</a>
+      <button id="logoutButton" class="button compact" type="button" hidden>Log out</button>
+    </div>
+  </header>
+
+  <main class="admin-shell">
+    <section id="setupPanel" class="setup-card glass" hidden>
+      <span class="eyebrow">SETUP REQUIRED</span>
+      <h1>Connect Firebase</h1>
+      <p>The website is complete, but public edits need a shared database. Follow the included README to connect your free Firebase project.</p>
+      <ol>
+        <li>Create a Firebase project and Firestore database.</li>
+        <li>Enable Email/Password authentication.</li>
+        <li>Create your private administrator account.</li>
+        <li>Paste the Firebase web configuration into <code>firebase-config.js</code>.</li>
+        <li>Publish the included Firestore security rules using your Firebase UID.</li>
+      </ol>
+      <a class="button primary" href="index.html">Open public preview</a>
+    </section>
+
+    <section id="loginPanel" class="login-layout">
+      <div class="login-art">
+        <img src="assets/uur-flag.svg" alt="">
+        <span class="eyebrow">AUTHORIZED ACCESS</span>
+        <h1>U.U.R. Webmaster Dashboard</h1>
+        <p>Manage every website shown in the public Union directory.</p>
+        <div class="login-features">
+          <span>✓ Add and edit sites</span>
+          <span>✓ Feature important pages</span>
+          <span>✓ Sort and categorize links</span>
+          <span>✓ Export and import backups</span>
+        </div>
+      </div>
+
+      <form id="loginForm" class="login-card glass">
+        <span class="eyebrow">UNIONNET ADMINISTRATION</span>
+        <h2>Sign in</h2>
+        <p>Use the Firebase administrator account created for this directory.</p>
+
+        <label>Email address
+          <input id="loginEmail" type="email" required autocomplete="username">
+        </label>
+
+        <label>Password
+          <input id="loginPassword" type="password" required autocomplete="current-password">
+        </label>
+
+        <button class="button primary full" type="submit">Sign in</button>
+        <p id="loginMessage" class="form-message"></p>
+      </form>
+    </section>
+
+    <section id="dashboard" class="dashboard" hidden>
+      <div class="dashboard-top">
+        <div>
+          <span class="eyebrow">AUTHENTICATED WEBMASTER</span>
+          <h1>Directory dashboard</h1>
+          <p id="signedInUser">Connected.</p>
+        </div>
+
+        <div class="dashboard-actions">
+          <button id="newSiteButton" class="button primary" type="button">Add website</button>
+          <button id="exportButton" class="button ghost" type="button">Export backup</button>
+          <label class="button ghost file-button">Import backup
+            <input id="importInput" type="file" accept=".json,application/json">
+          </label>
+        </div>
+      </div>
+
+      <section class="admin-stats">
+        <article><span>Total sites</span><strong id="adminTotal">0</strong></article>
+        <article><span>Online</span><strong id="adminOnline">0</strong></article>
+        <article><span>Featured</span><strong id="adminFeatured">0</strong></article>
+        <article><span>Categories</span><strong id="adminCategories">0</strong></article>
+      </section>
+
+      <section class="admin-grid">
+        <aside class="editor glass">
+          <div class="editor-head">
+            <div><span class="eyebrow">SITE RECORD</span><h2 id="editorTitle">Add website</h2></div>
+            <button id="resetFormButton" class="text-button" type="button">Clear</button>
+          </div>
+
+          <form id="siteForm">
+            <input id="recordId" type="hidden">
+
+            <label>Website name
+              <input id="siteName" required maxlength="80" placeholder="U.U.R. Government">
+            </label>
+
+            <label>Website address
+              <input id="siteUrl" required type="url" placeholder="https://example.github.io/site/">
+            </label>
+
+            <div class="field-row">
+              <label>Category
+                <input id="siteCategory" required maxlength="40" placeholder="Government">
+              </label>
+
+              <label>Status
+                <select id="siteStatus">
+                  <option>Online</option>
+                  <option>Limited</option>
+                  <option>Archive</option>
+                  <option>Restricted</option>
+                  <option>Coming Soon</option>
+                </select>
+              </label>
+            </div>
+
+            <label>Description
+              <textarea id="siteDescription" required maxlength="420" placeholder="Describe the website and its purpose."></textarea>
+            </label>
+
+            <label>Tags <small>Separate with commas</small>
+              <input id="siteTags" placeholder="government, constitution, central city">
+            </label>
+
+            <label>Logo image URL <small>Optional</small>
+              <input id="siteIconUrl" type="url" placeholder="https://…/logo.png">
+            </label>
+
+            <div class="field-row">
+              <label>Display order
+                <input id="siteOrder" type="number" value="100" min="0" max="9999">
+              </label>
+
+              <label>Button label
+                <input id="siteButtonLabel" maxlength="24" value="Open website">
+              </label>
+            </div>
+
+            <label class="check-row">
+              <input id="siteFeatured" type="checkbox">
+              <span>Feature on the homepage</span>
+            </label>
+
+            <div class="preview-panel">
+              <span class="eyebrow">CARD PREVIEW</span>
+              <div id="cardPreview"></div>
+            </div>
+
+            <div class="form-actions">
+              <button class="button primary" type="submit">Save website</button>
+              <button id="duplicateButton" class="button ghost" type="button">Duplicate</button>
+            </div>
+            <p id="formMessage" class="form-message"></p>
+          </form>
+        </aside>
+
+        <section class="records glass">
+          <div class="records-head">
+            <div>
+              <span class="eyebrow">PUBLISHED RECORDS</span>
+              <h2>Websites</h2>
+            </div>
+            <input id="adminSearch" type="search" placeholder="Filter records…">
+          </div>
+          <div id="recordsList" class="records-list"></div>
+        </section>
+      </section>
+    </section>
+  </main>
+
+  <dialog id="confirmDialog" class="confirm-dialog">
+    <h2>Delete this website?</h2>
+    <p id="confirmText">This removes it from the public directory.</p>
+    <div>
+      <button id="cancelDeleteButton" class="button ghost" type="button">Cancel</button>
+      <button id="confirmDeleteButton" class="button danger" type="button">Delete</button>
+    </div>
+  </dialog>
+
+  <script type="module" src="assets/admin.js"></script>
+</body>
+</html>

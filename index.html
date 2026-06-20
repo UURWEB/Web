@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Official directory of public websites of the Union of the United Republics.">
+  <title>U.U.R. Web Directory</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <div class="bg-orb bg-orb-a"></div>
+  <div class="bg-orb bg-orb-b"></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html">
+        <img src="assets/uur-flag.svg" alt="U.U.R. flag">
+        <div>
+          <span class="brand-kicker">Union of the United Republics</span>
+          <strong>U.U.R. Web Directory</strong>
+        </div>
+      </a>
+
+      <nav class="top-nav">
+        <a href="#featured">Featured</a>
+        <a href="#directory">Directory</a>
+        <a href="#network">Network</a>
+        <button id="themeButton" class="icon-button" type="button" aria-label="Toggle dark mode">◐</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero shell">
+      <div class="hero-copy">
+        <span class="eyebrow">OFFICIAL UNION NETWORK INDEX</span>
+        <h1>Every U.U.R. website.<br><span>One official directory.</span></h1>
+        <p>Browse government departments, public institutions, financial services, military portals, regional offices, archives, utilities, and affiliated organizations across the Union.</p>
+
+        <div class="hero-actions">
+          <a class="button primary" href="#directory">Browse directory</a>
+          <button id="favoritesToggle" class="button ghost" type="button">Saved sites</button>
+        </div>
+
+        <div class="hero-meta">
+          <span><b id="heroSiteCount">0</b> registered sites</span>
+          <span><b id="heroCategoryCount">0</b> categories</span>
+          <span><b id="heroOnlineCount">0</b> online services</span>
+        </div>
+      </div>
+
+      <aside class="network-card">
+        <div class="network-card-top">
+          <div>
+            <span class="status-dot"></span>
+            <small>UNIONNET STATUS</small>
+          </div>
+          <strong>Operational</strong>
+        </div>
+        <div class="network-screen">
+          <div class="screen-row"><span>Central relay</span><b>ONLINE</b></div>
+          <div class="screen-row"><span>Public directory</span><b>SYNCED</b></div>
+          <div class="screen-row"><span>Central time</span><b id="unionClock">--:--:--</b></div>
+          <div class="screen-row"><span>Display date</span><b id="unionDate">--/--/1926</b></div>
+        </div>
+        <div class="network-card-footer" id="modeNotice">Loading directory…</div>
+      </aside>
+    </section>
+
+    <section class="notice-bar">
+      <div class="shell notice-inner">
+        <span class="notice-label">PUBLIC NOTICE</span>
+        <div class="notice-track"><span id="announcementText">The Office of Public Information maintains this official directory of U.U.R. electronic services.</span></div>
+      </div>
+    </section>
+
+    <section id="featured" class="shell section">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">SELECTED SERVICES</span>
+          <h2>Featured websites</h2>
+        </div>
+        <p>Frequently used and important services selected by the Office of Public Information.</p>
+      </div>
+      <div id="featuredGrid" class="featured-grid"></div>
+    </section>
+
+    <section id="directory" class="shell section">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">MASTER PUBLIC INDEX</span>
+          <h2>Website directory</h2>
+        </div>
+        <p id="resultSummary">Loading websites…</p>
+      </div>
+
+      <div class="toolbar glass">
+        <label class="search-field">
+          <span>Search the Union network</span>
+          <div>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m21 21-4.35-4.35m2.35-5.65a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z"/></svg>
+            <input id="searchInput" type="search" placeholder="Search websites, departments, or services…">
+          </div>
+        </label>
+
+        <label class="select-field">
+          <span>Status</span>
+          <select id="statusFilter">
+            <option value="all">All statuses</option>
+            <option value="Online">Online</option>
+            <option value="Limited">Limited</option>
+            <option value="Archive">Archive</option>
+            <option value="Restricted">Restricted</option>
+            <option value="Coming Soon">Coming Soon</option>
+          </select>
+        </label>
+
+        <label class="select-field">
+          <span>Sort</span>
+          <select id="sortSelect">
+            <option value="order">Official order</option>
+            <option value="name">Name A–Z</option>
+            <option value="newest">Recently added</option>
+            <option value="category">Category</option>
+          </select>
+        </label>
+
+        <div class="view-switch">
+          <span>View</span>
+          <div>
+            <button id="gridViewButton" class="active" type="button">Grid</button>
+            <button id="listViewButton" type="button">List</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="categoryFilters" class="category-filters"></div>
+
+      <div id="emptyState" class="empty-state glass" hidden>
+        <strong>No matching websites</strong>
+        <p>Try another search term or clear the active filters.</p>
+        <button id="clearFiltersButton" class="button ghost" type="button">Clear filters</button>
+      </div>
+
+      <div id="siteGrid" class="site-grid"></div>
+    </section>
+
+    <section id="network" class="shell section">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">UNIONNET ORGANIZATION</span>
+          <h2>Network map</h2>
+        </div>
+        <p>Browse official links grouped by department and institutional category.</p>
+      </div>
+      <div id="networkMap" class="network-map"></div>
+    </section>
+
+    <section class="shell info-band">
+      <article>
+        <span>01</span>
+        <div><h3>Officially maintained</h3><p>Every entry is added through the U.U.R. webmaster dashboard.</p></div>
+      </article>
+      <article>
+        <span>02</span>
+        <div><h3>Easy to browse</h3><p>Search, filter, favorite, sort, and open every public website from one page.</p></div>
+      </article>
+      <article>
+        <span>03</span>
+        <div><h3>Always public</h3><p>Visitors never need an account to use the directory.</p></div>
+      </article>
+    </section>
+  </main>
+
+  <dialog id="siteDialog" class="site-dialog">
+    <button id="closeDialogButton" class="dialog-close" type="button" aria-label="Close">×</button>
+    <div id="dialogContent"></div>
+  </dialog>
+
+  <footer class="footer">
+    <div class="shell footer-inner">
+      <div class="footer-brand">
+        <img src="assets/uur-flag.svg" alt="">
+        <div><strong>U.U.R. Web Directory</strong><span>Office of Public Information · Central City</span></div>
+      </div>
+      <div class="footer-links">
+        <a href="#directory">Directory</a>
+        <a href="#network">Network map</a>
+        <a href="admin.html">Webmaster login</a>
+      </div>
+      <p>UnionNet public directory · Central Standard Time · Current display year offset: −100 years</p>
+    </div>
+  </footer>
+
+  <script type="module" src="assets/public.js"></script>
+</body>
+</html>
